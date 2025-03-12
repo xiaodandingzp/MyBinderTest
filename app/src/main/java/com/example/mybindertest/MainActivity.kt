@@ -31,6 +31,8 @@ class MainActivity : ComponentActivity() {
         }
 
     }
+
+//    onCreate的bundle可能为空
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.application.getSystemService<ActivityManager>()
@@ -44,5 +46,27 @@ class MainActivity : ComponentActivity() {
             val uri_user = Uri.parse("content://zp.com.ping")
             contentResolver.insert(uri_user, null)
         }
+    }
+
+//   在后台别kill后，旋转屏幕方向等在activity销毁后重建时会调用。第一次创建activity时不会调用
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.i("zpppppppp", "onRestoreInstanceState")
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+//    退后台 切换到其他activity 按下电源键 从任务栈切换到其他进程时会调用 在onStop后调用
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i("zpppppppp", "onSaveInstanceState onSaveInstanceState onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        Log.i("zpppppppp", "onStop onStop onStop")
+        super.onStop()
+    }
+
+    override fun onPause() {
+        Log.i("zpppppppp", "onPause onPause onPause")
+        super.onPause()
     }
 }
